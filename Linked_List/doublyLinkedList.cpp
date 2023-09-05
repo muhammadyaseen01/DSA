@@ -184,8 +184,6 @@ void deleteAtAnyPosition(){
     curr->prev->next = curr->next;
     free(curr);
     return;
-
-
 }
 
 

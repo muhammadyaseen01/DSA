@@ -43,8 +43,9 @@ void course_insertAtTail()
 
         Course *new_node = new Course; // initialize node and add code and next to null
         new_node->C_code = code;
-        new_node->crs_next = NULL; // tail (last me add kr rhay is liye next ko null kr rhay hain)
-
+        new_node->crs_next = NULL;
+        // //error line
+        // new_node->std_head = NULL; //tail (last me add kr rhay is liye next ko null kr rhay hain)
         Course *crs_curr = crs_head;       // agr list me elements hain to last element tk move krnge uske liye ek curr ptr initialize
         while (crs_curr->crs_next != NULL) // jab tk curr ka next null nh hojata tab tak curr ko agy move krnge
         {                                  // curr k next null hony ka matlab curr point the last element of the list
@@ -125,24 +126,26 @@ void student_insertion()
         if (crs_curr->C_code == crs_id)
         {
             Student *std_curr = crs_curr->std_head;
-            while (std_curr != NULL)
-            {
-                if (std_curr->ID == std_id)
-                {
-                    cout << "ID already exist! ";
-                    return;
-                }
-                std_curr = std_curr->std_next;
-            }
+            // while (std_curr!= NULL)
+            // {
+            //     cout << "okay" << endl;
+            //     if (std_curr->ID == std_id)
+            //     {
+            //         cout << "ID already exist! ";
+            //         return;
+            //     }
+            //     std_curr = std_curr->std_next;
+            // }
             Student *new_node = new Student;
             new_node->ID = std_id;
             new_node->std_next = NULL;
 
+            cout << "okay" << endl;
             if (crs_curr->std_head == NULL)
             {
                 crs_curr->std_head = new_node;
-                cout<<"std enrolled"<<endl;
-                cout<< crs_curr->std_head->ID<<endl;
+                cout << "std enrolled" << endl;
+                cout << crs_curr->std_head->ID << endl;
             }
             else
             {
@@ -152,7 +155,7 @@ void student_insertion()
                     std_curr = std_curr->std_next;
                 }
                 std_curr->std_next = new_node;
-                cout<<"std enrolled"<<endl;
+                cout << "std enrolled" << endl;
             }
             // cout<<"Student enrolled!";
             return;
@@ -160,6 +163,50 @@ void student_insertion()
         crs_curr = crs_curr->crs_next;
     }
     cout << "There is no course exist! ";
+}
+
+void delete_student()
+{
+    int std_id, crs_id;
+    cout << "enter the course id where you want to delete: ";
+    cin >> crs_id;
+    cout << "enter the student id: ";
+    cin >> std_id;
+
+    Course *crs_curr = crs_head;
+    while (crs_curr != NULL)
+    {
+        if (crs_curr->C_code == crs_id)
+        {
+            Student *std_curr = crs_curr->std_head;
+            Student *std_prev = crs_curr->std_head;
+            if (std_curr == NULL)
+            {
+                cout << "No student Enrolled!" << endl;
+                return;
+            }
+            else if (std_curr->std_next == NULL)
+            { // list have only one(1) node
+                free(std_curr);
+                crs_curr->std_head = NULL;
+                return;
+            }
+            std_curr = std_curr->std_next; // ek step agy krdia h prev se ab isse delete krna hua to iska next prev k next me daal dnga
+            while (std_curr != NULL)
+            {
+                if (std_curr->ID == crs_id)
+                { // prev is one node previous to curr
+                    std_prev->std_next = std_curr->std_next;
+                    free(std_curr);
+                    return;
+                }
+                std_prev = std_prev->std_next;
+                std_curr = std_curr->std_next;
+            }
+        }
+        crs_curr = crs_curr->crs_next;
+    }
+    cout << "Course doesn't exist!" << endl;
 }
 
 void display()
@@ -191,14 +238,13 @@ void display()
 int main()
 {
     course_insertAtTail();
-    course_insertAtTail();
-    course_insertAtTail();
-    course_insertAtTail();
+
     display();
+    cout<<"okay";
+    // course_insertAtAnyPosition();
+    // display(); // Add this line to display the updated list after inserting at any position
 
-    course_insertAtAnyPosition();
-    display(); // Add this line to display the updated list after inserting at any position
-
+    student_insertion();
     student_insertion();
     display();
 
