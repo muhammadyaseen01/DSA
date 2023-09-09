@@ -174,7 +174,7 @@ void deleteAtAnyPosition(){
     // }
     int curr_pos = 0;
     Node* curr = head;
-    while(curr_pos != node_index - 1){
+    while(curr_pos != node_index){
         curr = curr->next; //prev at node_index 
         curr_pos++;
     }
