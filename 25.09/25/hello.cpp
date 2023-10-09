@@ -1,0 +1,1 @@
+//how to insert node in singly linked list?

@@ -252,52 +252,109 @@ void AddImmediate(int new_val)
     }
 }
 
-void DeleteImmediate(){
-    if(cursor == NULL){
-        cout<<"There is no node in the List!"<<endl;
+void DeleteImmediate()
+{
+    if (cursor == NULL)
+    {
+        cout << "There is no node in the List!" << endl;
         return;
     }
-    else if(cursor == head && cursor->next == NULL){//cursor at head and list contain only one node(head)
-        cout<<"The cursor value: "<<cursor->val<<" is deleted! and cursor moved to NULL"<<endl;
+    else if (cursor == head && cursor->next == NULL)
+    { // cursor at head and list contain only one node(head)
+        cout << "The cursor value: " << cursor->val << " is deleted! and cursor moved to NULL" << endl;
         free(cursor);
     }
-    Node* curr;
-    if(cursor == head && cursor->next != NULL){
+    Node *curr;
+    if (cursor == head && cursor->next != NULL)
+    {
         curr = head;
         cursor = cursor->next;
         head = head->next; // or (head = cursor)
-        cout<<"The cursor value: "<<curr->val<<" is deleted! and moved 1 step forward at: "<<cursor->val<<endl;
+        cout << "The cursor value: " << curr->val << " is deleted! and moved 1 step forward at: " << cursor->val << endl;
         free(curr);
     }
-    else if(cursor == tail){//cursor point at last node
+    else if (cursor == tail)
+    { // cursor point at last node
         curr = tail;
         cursor = cursor->prev;
         tail = tail->prev;
-        cout<<"The cursor value: "<<curr->val<<" is deleted! and moved 1 step forward at: "<<cursor->val<<endl;
+        cout << "The cursor value: " << curr->val << " is deleted! and moved 1 step forward at: " << cursor->val << endl;
         free(curr);
     }
-    else if(cursor->next != NULL){
+    else if (cursor->next != NULL)
+    {
         curr = cursor;
         cursor = cursor->next;
         curr->prev->next = cursor;
         cursor->prev = curr->prev;
-        cout<<"The cursor value: "<<curr->val<<" is deleted! and moved 1 step forward at: "<<cursor->val<<endl;
+        cout << "The cursor value: " << curr->val << " is deleted! and moved 1 step forward at: " << cursor->val << endl;
         free(curr);
-
-
     }
 }
 
-void print(){
-    if(cursor==NULL){
-        cout<<"There is no node in the list!"<<endl;
+void UpdateIndex(int node_index, int new_val)
+{
+    if (head == NULL)
+    {
+        cout << "There is no node in the list!" << endl;
         return;
     }
-    else{
-        cout<<"The value at cursor's node is: "<<cursor->val<<endl;
+
+    int curr_pos = 0;
+    Node *curr = head;
+
+    while (curr_pos != node_index)
+    {
+        curr = curr->next;
+        curr_pos++;
     }
+    curr->val = new_val;
+    return;
 }
 
+void UpdateImmediate(int new_val){
+    if(head == NULL){
+        cout << "There is no node in the list!" << endl;
+        return;
+    }
+
+    cursor->val = new_val;
+    return;    
+}
+
+void ShiftIndex(int node_index){
+    if (head == NULL){
+        cout << "There is no node in the list!" << endl;
+        return;
+    }
+    Node *curr = head;
+    int curr_pos = 0;
+    while(curr_pos != node_index)
+    {
+        curr = curr->next;
+        curr_pos++;
+    }
+    int swap;
+    swap = cursor->val;
+    cursor->val = curr->val;
+    curr->val =swap;
+    return;
+
+}
+
+
+void print()
+{
+    if (cursor == NULL)
+    {
+        cout << "There is no node in the list!" << endl;
+        return;
+    }
+    else
+    {
+        cout << "The value at cursor's node is: " << cursor->val << endl;
+    }
+}
 
 void printlist()
 {
@@ -349,14 +406,34 @@ int main()
     DeleteImmediate();
     printlist();
     print();
-    cout<<cursor->val<<endl;;
-    cout<<"hello"<<endl;
+    cout << cursor->val << endl;
+    ;
+    cout << "hello" << endl;
     MoveBackward(8);
     // cout<<"hello"<<endl;
-    cout<<cursor->val<<endl;;
+    cout << cursor->val << endl;
+    ;
     DeleteImmediate();
-    cout<<cursor->val<<endl;
+    cout << cursor->val << endl;
     print();
+
+    cout << endl;
+    printlist();
+    cout << endl;
+
+    UpdateIndex(13,18);// (index, val)
+    printlist();
+    
+    cout<<endl;
+    UpdateImmediate(77);
+    printlist();
+
+    cout<<cursor->val<<endl;
+    cout<<"-----------"<<endl;
+    ShiftIndex(3);
+    printlist();
+    cout<<"-----------"<<endl;
+    cout<<cursor->val<<endl;
 
     // // deleteAtIndex(3);
     // printlist();
