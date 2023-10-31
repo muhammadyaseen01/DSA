@@ -1,12 +1,12 @@
 #include <iostream>
 using namespace std;
 
-struct Node
+struct Stack
 {
     int val;
-    Node *next;
+    Stack *next;
 };
-Node *head = NULL;
+Stack *head = NULL;
 int currSize=0;
 
 bool isEmpty()
@@ -16,7 +16,7 @@ bool isEmpty()
 
 void push(int new_val){
     //overflow ki condition
-    Node *new_node = new Node();
+    Stack *new_node = new Stack();
     new_node->val = new_val;
     new_node->next = head;
     head = new_node;
@@ -24,7 +24,7 @@ void push(int new_val){
 }
 
 int pop(){
-    Node *curr = head;
+    Stack *curr = head;
     head = head->next;
     curr->next =NULL;//disconnecting top from the list
     int result = curr->val;
