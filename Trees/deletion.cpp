@@ -157,18 +157,29 @@ int main()
     cout<<endl;
     postorder(root);
     cout<<endl;
+    cout<< "after deletion "<<endl;
 
-    // BST_Node *searched = Search_In_BST(root, 4);
-    if(Search_In_BST(root, 2) == NULL){
-        cout<< "Value doesnot exist! "<<endl;
-    }else{
-        cout<<"Value Exist! "<<endl;
-        cout<<"Value is: "<<Search_In_BST(root, 2)->val<<endl;
-    }
-    // cout<<"okay"<<endl;
-    root = Delete_In_BST(root, 173);
-    // cout<<"okay"<<endl;
+    root = Delete_In_BST(root, 4);
+
+    preorder(root);
     cout<<endl;
     inorder(root);
+    cout<<endl;
+    postorder(root);
+    cout<<endl;
+
+    // // BST_Node *searched = Search_In_BST(root, 4);
+    // if(Search_In_BST(root, 2) == NULL){
+    //     cout<< "Value doesnot exist! "<<endl;
+    // }else{
+    //     cout<<"Value Exist! "<<endl;
+    //     cout<<"Value is: "<<Search_In_BST(root, 2)->val<<endl;
+    // }
+    // // cout<<"okay"<<endl;
+    // root = Delete_In_BST(root, 173);
+    // // cout<<"okay"<<endl;
+    // cout<<endl;
+    // // inorder(root);
+    // postorder(root);
     return 0;
 }

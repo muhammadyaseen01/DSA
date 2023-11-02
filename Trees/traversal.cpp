@@ -80,6 +80,10 @@ int main()
         insert_At_BST(root, new_val);
         insert_At_BST(root, new_val);
     }
+    preorder(root);
+    cout<<endl;
     inorder(root);
+    cout<<endl;
+    postorder(root);
     return 0;
 }
